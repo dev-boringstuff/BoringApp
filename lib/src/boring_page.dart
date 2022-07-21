@@ -18,11 +18,14 @@ class BoringPage {
   GoRoute get route => GoRoute(
         redirect: redirect,
         path: path,
-        pageBuilder: (context, state) => BoringTransitionPage.defaultTransition(
-            key: state.pageKey,
-            pageBuilder: pageBuilder!,
-            params: BoringParams(
-                pathParams: state.params, queryParams: state.queryParams)),
+        pageBuilder: (context, state) {
+          print(state.params);
+          return BoringTransitionPage.defaultTransition(
+              key: state.pageKey,
+              pageBuilder: pageBuilder!,
+              params: BoringParams(
+                  pathParams: state.params, queryParams: state.queryParams));
+        },
         routes: pages.map((page) => page.route).toList(),
       );
 }

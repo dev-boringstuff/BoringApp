@@ -57,8 +57,11 @@ class BoringDrawer extends Drawer {
                     : null,
                 selected: false,
                 hoverColor: index == selectedIndex ? Colors.transparent : null,
-                onTap: () => GoRouter.of(context)
-                    .go("/${paths[index].toLowerCase().replaceAll(" ", "-")}"),
+                onTap: () {
+                  print("/${paths[index].toLowerCase()}");
+                  GoRouter.of(context).go(
+                      "/${paths[index].toLowerCase().replaceAll(" ", "-")}");
+                },
               );
               if (index != selectedIndex) {
                 return listTile;

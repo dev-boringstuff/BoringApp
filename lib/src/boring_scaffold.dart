@@ -24,16 +24,16 @@ class BoringScaffold extends StatelessWidget {
       final Widget bodyContent = transitionAnimation == null
           ? body
           : AnimatedBuilder(
-              child: body,
               animation: transitionAnimation!,
               builder: (context, child) {
                 return SlideTransition(
-                    child: body,
                     position: transitionAnimation!.drive(
                       Tween(begin: const Offset(1, 0), end: Offset.zero)
                           .chain(CurveTween(curve: Curves.ease)),
-                    ));
-              });
+                    ),
+                    child: body);
+              },
+              child: body);
       return Scaffold(
           floatingActionButtonLocation: floatingActionButtonLocation,
           floatingActionButton: floatinActionButton,
