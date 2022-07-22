@@ -28,7 +28,7 @@ class BoringApp<T> extends StatelessWidget {
         if (initialState != null) {
           final boringStatusProvider =
               Provider.of<BoringStatusProvider<T>>(context);
-          boringStatusProvider.setLogStatus(initialState!);
+          boringStatusProvider.setLogStatus(initialState as T);
         }
 
         return MaterialApp.router(
