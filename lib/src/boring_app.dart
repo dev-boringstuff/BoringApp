@@ -16,6 +16,7 @@ class BoringApp extends StatelessWidget {
     return MaterialApp.router(
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
+      routeInformationProvider: _router.routeInformationProvider,
     );
   }
 }
