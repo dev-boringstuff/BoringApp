@@ -1,8 +1,11 @@
+import 'package:boring_app/src/providers/boring_status_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class BoringScaffold extends StatelessWidget {
+class BoringScaffold<T> extends StatelessWidget {
   const BoringScaffold({
     this.transitionAnimation,
+    this.boringGuard,
     this.appBar,
     this.floatingActionButtonLocation,
     required this.body,
@@ -13,28 +16,37 @@ class BoringScaffold extends StatelessWidget {
   final AppBar? appBar;
   final Drawer drawer;
   final Widget body;
+  final Function(T?)? boringGuard;
   final Widget? floatinActionButton;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final Animation<double>? transitionAnimation;
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: ((context, constraints) {
-      final bool isSmall = constraints.maxWidth < 1000;
-      final Widget bodyContent = transitionAnimation == null
-          ? body
-          : AnimatedBuilder(
-              animation: transitionAnimation!,
-              builder: (context, child) {
-                return SlideTransition(
-                    position: transitionAnimation!.drive(
-                      Tween(begin: const Offset(1, 0), end: Offset.zero)
-                          .chain(CurveTween(curve: Curves.ease)),
-                    ),
-                    child: body);
-              },
-              child: body);
-      return Scaffold(
+    if (boringGuard != null) {
+      final boringStatusProvider =
+          Provider.of<BoringStatusProvider<T>>(context);
+
+      boringGuard?.call(boringStatusProvider.status);
+    }
+
+    return LayoutBuilder(
+      builder: ((context, constraints) {
+        final bool isSmall = constraints.maxWidth < 1000;
+        final Widget bodyContent = transitionAnimation == null
+            ? body
+            : AnimatedBuilder(
+                animation: transitionAnimation!,
+                builder: (context, child) {
+                  return SlideTransition(
+                      position: transitionAnimation!.drive(
+                        Tween(begin: const Offset(1, 0), end: Offset.zero)
+                            .chain(CurveTween(curve: Curves.ease)),
+                      ),
+                      child: body);
+                },
+                child: body);
+        return Scaffold(
           floatingActionButtonLocation: floatingActionButtonLocation,
           floatingActionButton: floatinActionButton,
           appBar: appBar,
@@ -44,7 +56,9 @@ class BoringScaffold extends StatelessWidget {
               : Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [drawer, Expanded(child: bodyContent)],
-                ));
-    }));
+                ),
+        );
+      }),
+    );
   }
 }
