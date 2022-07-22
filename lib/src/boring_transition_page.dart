@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:boring_app/src/boring_params.dart';
+import 'package:boring_app/src/models/boring_params_model.dart';
 
 typedef BoringRoutePageBuilder = Widget Function(
     BuildContext context,

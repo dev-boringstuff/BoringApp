@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:boring_app/src/boring_params.dart';
+import 'package:boring_app/src/models/boring_params_model.dart';
 import 'package:boring_app/src/boring_transition_page.dart';
 
 class BoringPage {
@@ -18,14 +18,12 @@ class BoringPage {
   GoRoute get route => GoRoute(
         redirect: redirect,
         path: path,
-        pageBuilder: (context, state) {
-          print(state.params);
-          return BoringTransitionPage.defaultTransition(
-              key: state.pageKey,
-              pageBuilder: pageBuilder!,
-              params: BoringParams(
-                  pathParams: state.params, queryParams: state.queryParams));
-        },
+        pageBuilder: (context, state) => BoringTransitionPage.defaultTransition(
+          key: state.pageKey,
+          pageBuilder: pageBuilder!,
+          params: BoringParams(
+              pathParams: state.params, queryParams: state.queryParams),
+        ),
         routes: pages.map((page) => page.route).toList(),
       );
 }

@@ -32,47 +32,48 @@ class MyApp extends StatelessWidget {
                       ))),
         ),
         BoringPage(
-            path: "/A",
-            pageBuilder: (context, animation, secondaryAnimation, params) =>
-                BoringScaffold(
-                    transitionAnimation: animation,
-                    floatingActionButtonLocation:
-                        FloatingActionButtonLocation.centerTop,
-                    floatinActionButton: FloatingActionButton(
-                      child: const Icon(Icons.add),
-                      onPressed: () {},
-                    ),
-                    drawer: BoringDrawer(1),
-                    body: Container(
-                        color: Colors.red,
-                        child: const Center(
-                          child: Center(),
-                        ))),
-            pages: [
-              BoringPage(
-                  path: ":id",
-                  pageBuilder: (context, animation, secondaryAnimation,
-                          params) =>
-                      BoringScaffold(
-                          appBar: AppBar(
-                            title: Text(params.pathParams['id'] ?? ""),
-                          ),
-                          transitionAnimation: animation,
-                          floatingActionButtonLocation:
-                              FloatingActionButtonLocation.centerTop,
-                          floatinActionButton: FloatingActionButton(
-                            child: const Icon(Icons.add),
-                            onPressed: () {},
-                          ),
-                          drawer: BoringDrawer(1),
-                          body: Container(
-                            color: Colors.green,
-                            child: Center(
-                              child: Center(
-                                  child: Text(params.pathParams['id'] ?? "")),
-                            ),
-                          )))
-            ])
+          path: "/A",
+          pageBuilder: (context, animation, secondaryAnimation, params) =>
+              BoringScaffold(
+                  transitionAnimation: animation,
+                  floatingActionButtonLocation:
+                      FloatingActionButtonLocation.centerTop,
+                  floatinActionButton: FloatingActionButton(
+                    child: const Icon(Icons.add),
+                    onPressed: () {},
+                  ),
+                  drawer: BoringDrawer(1),
+                  body: Container(
+                      color: Colors.red,
+                      child: const Center(
+                        child: Center(),
+                      ))),
+          pages: [
+            BoringPage(
+              path: ":id",
+              pageBuilder: (context, animation, secondaryAnimation, params) =>
+                  BoringScaffold(
+                appBar: AppBar(
+                  title: Text(params.pathParams['id'] ?? ""),
+                ),
+                transitionAnimation: animation,
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.centerTop,
+                floatinActionButton: FloatingActionButton(
+                  child: const Icon(Icons.add),
+                  onPressed: () {},
+                ),
+                drawer: BoringDrawer(1),
+                body: Container(
+                  color: Colors.green,
+                  child: Center(
+                    child: Center(child: Text(params.pathParams['id'] ?? "")),
+                  ),
+                ),
+              ),
+            )
+          ],
+        )
       ],
     );
   }
