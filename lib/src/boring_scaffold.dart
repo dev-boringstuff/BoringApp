@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class BoringScaffold<T> extends StatelessWidget {
-  const BoringScaffold({
+  BoringScaffold({
     this.transitionAnimation,
     this.boringGuard,
     this.appBar,
@@ -12,7 +12,9 @@ class BoringScaffold<T> extends StatelessWidget {
     required this.drawer,
     this.floatinActionButton,
     Key? key,
-  }) : super(key: key);
+  })  : assert(T != dynamic || boringGuard == null,
+            'If boringGuard is not null you need to specify a type T'),
+        super(key: key);
   final AppBar? appBar;
   final Drawer drawer;
   final Widget body;
