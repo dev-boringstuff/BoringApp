@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BoringApp<int>(
+      initialState: 0,
       pages: [
         BoringPage(path: '/', redirect: (_) => "/home"),
         BoringPage(

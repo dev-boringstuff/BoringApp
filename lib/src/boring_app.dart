@@ -26,9 +26,11 @@ class BoringApp<T> extends StatelessWidget {
       ],
       child: Builder(builder: (context) {
         if (initialState != null) {
-          final boringStatusProvider =
-              Provider.of<BoringStatusProvider<T>>(context);
-          boringStatusProvider.setLogStatus(initialState as T);
+          Future.delayed(const Duration(milliseconds: 0), () {
+            final boringStatusProvider =
+                Provider.of<BoringStatusProvider<T>>(context, listen: false);
+            boringStatusProvider.setLogStatus(initialState as T);
+          });
         }
 
         return MaterialApp.router(
