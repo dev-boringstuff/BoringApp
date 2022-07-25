@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         BoringPage(path: '/', redirect: (_) => "/home"),
         BoringPage(
           path: "/home",
-          scaffold: (animation, params) => BoringScaffold(
+          scaffold: (pckContext, animation, params) => BoringScaffold(
             boringGuard: (p0) {
               print(p0);
             },
@@ -25,7 +25,16 @@ class MyApp extends StatelessWidget {
                 FloatingActionButtonLocation.centerTop,
             floatinActionButton: FloatingActionButton(
               child: const Icon(Icons.add),
-              onPressed: () {},
+              onPressed: () {
+                final boringStatusProvider =
+                    Provider.of<BoringStatusProvider<int>>(pckContext,
+                        listen: false);
+
+                boringStatusProvider.setLogStatus(42);
+
+                print(
+                    'Boring status now is: ${boringStatusProvider.status.toString()}');
+              },
             ),
             drawer: BoringDrawer(0),
             body: Container(
@@ -38,7 +47,7 @@ class MyApp extends StatelessWidget {
         ),
         BoringPage(
           path: "/A",
-          scaffold: (animation, params) => BoringScaffold(
+          scaffold: (pckContext, animation, params) => BoringScaffold(
               transitionAnimation: animation,
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.centerTop,
@@ -55,7 +64,7 @@ class MyApp extends StatelessWidget {
           pages: [
             BoringPage(
               path: ":id",
-              scaffold: (animation, params) => BoringScaffold(
+              scaffold: (pckContext, animation, params) => BoringScaffold(
                 appBar: AppBar(
                   title: Text(params.pathParams['id'] ?? ""),
                 ),

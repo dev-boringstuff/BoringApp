@@ -15,14 +15,16 @@ class BoringPage<T> {
   final List<BoringPage> pages;
   //final BoringRoutePageBuilder? pageBuilder;
   final String? Function(GoRouterState) redirect;
-  final BoringScaffold<T> Function(Animation<double>, BoringParams)? scaffold;
+  final BoringScaffold<T> Function(
+      BuildContext, Animation<double>, BoringParams)? scaffold;
   GoRoute get route => GoRoute(
         redirect: redirect,
         path: path,
         pageBuilder: (context, state) => BoringTransitionPage.defaultTransition(
           key: state.pageKey,
           pageBuilder: (context, animation, secondaryAnimation, params) =>
-              scaffold?.call(animation, params) ?? const SizedBox.shrink(),
+              scaffold?.call(context, animation, params) ??
+              const SizedBox.shrink(),
           params: BoringParams(
               pathParams: state.params, queryParams: state.queryParams),
         ),
