@@ -12,8 +12,8 @@ class BoringScaffold<T> extends StatelessWidget {
     required this.drawer,
     this.floatinActionButton,
     Key? key,
-  }) : /*assert(boringGuard == null || T != dynamic,
-            "If boringGuard is not null, then you have to specify the generic class T in BoringApp"),*/
+  })  : assert(boringGuard == null || T != Object,
+            "If boringGuard is not null, then you have to specify the generic class T in BoringApp"),
         super(key: key);
   final AppBar? appBar;
   final Drawer drawer;

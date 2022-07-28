@@ -1,4 +1,5 @@
 import 'package:boring_app/boring_app.dart';
+import 'package:example/boring_drawer.dart';
 import 'package:flutter/material.dart';
 
 void main() {
