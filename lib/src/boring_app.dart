@@ -7,12 +7,14 @@ import 'package:provider/provider.dart';
 class BoringApp<T> extends StatelessWidget {
   BoringApp(
       {Key? key,
+      this.theme,
       /*required this.drawer,*/ this.initialState,
       required this.pages})
       : _router = GoRouter(routes: pages.map((page) => page.route).toList()),
         super(key: key);
   //ADD ROUTES TO THE DRAWER DYNAMICALLY
   //final BoringDrawer drawer;
+  final ThemeData? theme;
   final List<BoringPage<T>> pages;
   final GoRouter _router;
   final T? initialState;
@@ -34,6 +36,7 @@ class BoringApp<T> extends StatelessWidget {
         }
 
         return MaterialApp.router(
+          theme: theme,
           routeInformationParser: _router.routeInformationParser,
           routerDelegate: _router.routerDelegate,
           routeInformationProvider: _router.routeInformationProvider,
