@@ -8,6 +8,7 @@ class BoringApp<T> extends StatelessWidget {
   BoringApp(
       {Key? key,
       this.theme,
+      this.scrollBehavior,
       /*required this.drawer,*/ this.initialState,
       required this.pages})
       : _router = GoRouter(routes: pages.map((page) => page.route).toList()),
@@ -17,6 +18,7 @@ class BoringApp<T> extends StatelessWidget {
   final ThemeData? theme;
   final List<BoringPage<T>> pages;
   final GoRouter _router;
+  final ScrollBehavior? scrollBehavior;
   final T? initialState;
 
   @override
@@ -37,6 +39,7 @@ class BoringApp<T> extends StatelessWidget {
 
         return MaterialApp.router(
           theme: theme,
+          scrollBehavior: scrollBehavior,
           routeInformationParser: _router.routeInformationParser,
           routerDelegate: _router.routerDelegate,
           routeInformationProvider: _router.routeInformationProvider,
